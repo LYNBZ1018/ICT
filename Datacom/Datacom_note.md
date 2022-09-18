@@ -271,3 +271,70 @@ reboot  // 重启设备
 ```
 
 <img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220918230218348.png" alt="image-20220918230218348" style="zoom:80%;" />
+
+
+
+## 4.网络层协议及IP编制
+
+### 4.1网络层协议
+
+* 对网络层的设备提供逻辑地址
+* 负责数据报的寻址和转发
+* 经常被提及的IP是指直接或者间接与IP协议有关的任何内容
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220918234348824.png" alt="image-20220918234348824" style="zoom:67%;" />
+
+* TTL Time To Life 8bit，0-255
+* 协议号指明了数据部分使用了什么样的协议，即指明传输层使用了什么协议。
+
+![image-20220918235128932](https://gitee.com/lynbz1018/image/raw/master/img/20220918235130.png)
+
+### 4.2IPv4地址介绍
+
+#### IPv4地址定义
+
+* 用于在网络中标识一个节点
+* 用于IP报文在网络中寻址
+* IPv4地址有32bit，用点分十进制表示
+
+* 由 网络位 和 主机位 组成，后边要跟着网络掩码
+
+
+
+#### IPv4地址分类方式
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220919001739829.png" alt="image-20220919001739829" style="zoom:80%;" />
+
+
+
+* 主机位全为0是网络地址
+* 主机位全为1是广播地址
+* 可用地址数是2^n - 2
+
+<img src="https://gitee.com/lynbz1018/image/raw/master/img/20220919002010.png" alt="image-20220919002009017" style="zoom:80%;" />
+
+* 私网IP地址
+
+![image-20220919002612105](https://gitee.com/lynbz1018/image/raw/master/img/20220919002613.png)
+
+* 特殊IP地址
+
+<img src="https://gitee.com/lynbz1018/image/raw/master/img/20220919002930.png" alt="image-20220919002929129" style="zoom:80%;" />
+
+
+
+### 4.3子网划分
+
+
+
+
+
+### 4.4ICMP协议
+
+
+
+
+
+
+
+### 4.5IPv4地址配置及基本应用
