@@ -176,3 +176,98 @@
 * 接收方数据解封装
 
 ![image-20220915202950193](https://gitee.com/lynbz1018/image/raw/master/img/20220915202951.png)
+
+
+
+  
+
+## 3.华为VRP系统
+
+### 华为VRP系统概述
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220918172310494.png" alt="image-20220918172310494" style="zoom: 67%;" />
+
+* 可以将控制平面和转发平面分离
+* 可以解决不同产品在数据链路层使用不同的硬件而对网络层的影响
+
+![image-20220918172823319](https://gitee.com/lynbz1018/image/raw/master/img/20220918172824.png)
+
+* VRP发展进程
+
+<img src="https://gitee.com/lynbz1018/image/raw/master/img/20220918173243.png" alt="image-20220918173242614" style="zoom:67%;" />
+
+* 文件系统
+
+<img src="https://gitee.com/lynbz1018/image/raw/master/img/20220918173517.png" alt="image-20220918173516085" style="zoom:80%;" />
+
+* 存储设备
+
+![image-20220918174018038](https://gitee.com/lynbz1018/image/raw/master/img/20220918174019.png)
+
+#### 设备管理
+
+* 用户界面
+
+![image-20220918174944624](https://gitee.com/lynbz1018/image/raw/master/img/20220918175119.png)
+
+* 用户级别
+
+![image-20220918175135167](https://gitee.com/lynbz1018/image/raw/master/img/20220918175136.png)
+
+* WEB网管理方式
+  * 主机和路由器必须网络可达的，即可以ping通
+
+<img src="https://gitee.com/lynbz1018/image/raw/master/img/20220918175445.png" alt="image-20220918175444429" style="zoom:67%;" />
+
+* 命令行-本地登录
+  * 网络设备第一次通电配置 需要本地通电
+  * console是网络设备上的借口
+
+![image-20220918175803564](https://gitee.com/lynbz1018/image/raw/master/img/20220918175804.png)
+
+
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220918175934145.png" alt="image-20220918175934145" style="zoom:67%;" />
+
+* 远程登录
+* ssh是加密登录 会对用户名和密码加密 别人抓包抓到了也不能用加密后的字符用于登录
+* 终端和设备之间要可以ping通才可以连接
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220918180520646.png" alt="image-20220918180520646" style="zoom:67%;" />
+
+
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220918221256254.png" alt="image-20220918221256254" style="zoom:80%;" />
+
+
+
+### 华为VRP系统基本操作
+
+* 配置任务
+* 因为是全新没有配置过的路由器，所以第一次配置要用本地连接，通过串行口和console port
+
+![image-20220918222547159](https://gitee.com/lynbz1018/image/raw/master/img/20220918222548.png)
+
+```markdown
+display version  // 查看版本信息
+system-view  // 进入系统视图
+sysname DAtacom-Router  // 更改设备名称
+interface GigabitEthernet 0/0/1  // 进入接口视图
+ip address 20.1.1.1 24  // 配置ip
+undo ip address  // 删除上次配置
+display this  // 查看当前视图的配置
+quit  // 退会低级别的视图
+
+save  // 保存
+compare configuration  // 比较
+
+save datacom.cfg  // 保存配置文件
+dir // 查看
+display startup  // 查看启动文件
+startup saved-configuration datacom.cfg  // 设置启动文件
+reset saved-configuration
+
+reboot  // 重启设备
+```
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220918230218348.png" alt="image-20220918230218348" style="zoom:80%;" />
