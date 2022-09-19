@@ -325,16 +325,46 @@ reboot  // 重启设备
 
 ### 4.3子网划分
 
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220919235242825.png" alt="image-20220919235242825" style="zoom:80%;" />
+
+* 在实际网络划分中，常常从主机数多的子网开始划分
+
+### 4.4网际控制信息协议ICMP协议
+
+* 用来在网络设备中传递各种差错和控制信息
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220919235556129.png" alt="image-20220919235556129" style="zoom:80%;" />
 
 
 
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220920000005619.png" alt="image-20220920000005619" style="zoom:80%;" />
 
-### 4.4ICMP协议
+* ICMP 重定向
 
+当路由检测到一台机器使用非最优路由时，回向该主机发送一个ICMP重定向报文，请求主机改变路由。
 
+![image-20220920000324141](https://gitee.com/lynbz1018/image/raw/master/img/20220920000325.png)
 
+* ICMP差错检测
 
+用ping检测到达目的主机的可达性
+
+<img src="https://gitee.com/lynbz1018/image/raw/master/img/20220920000651.png" alt="image-20220920000650834" style="zoom:67%;" />
+
+* ICMP错误报告
+
+Tracert通过每次更改TTL来获取每一条的超时报告报文，来追踪路径和通过时间戳来计算往返时间
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220920001112620.png" alt="image-20220920001112620" style="zoom:67%;" />
 
 
 
 ### 4.5IPv4地址配置及基本应用
+
+
+
+* IP地址规划
+
+应该是自顶向下，规划的目标是易管理、易扩展、利用率高
+
+<img src="https://gitee.com/lynbz1018/image/raw/master/img/20220920001425.png" alt="image-20220920001424680" style="zoom:80%;" />
