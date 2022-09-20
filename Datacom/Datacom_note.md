@@ -368,3 +368,79 @@ Tracert通过每次更改TTL来获取每一条的超时报告报文，来追踪�
 应该是自顶向下，规划的目标是易管理、易扩展、利用率高
 
 <img src="https://gitee.com/lynbz1018/image/raw/master/img/20220920001425.png" alt="image-20220920001424680" style="zoom:80%;" />
+
+
+
+## 5.以太网交换基础
+
+### 5.1以太网交换协议
+
+* 以太网是当今局域网中最常用的通信协议标准
+* 以太网是建立在CSMA/CD（载波监听多路访问/冲突检测）机制上的广播型网络
+
+* 早期的以太网是共享式的发送数据帧前需要对网络进行监听
+  * 先在是交换机组网以太网，交换机可以隔离冲突域，但是不能隔离广播域
+
+
+
+* 冲突域
+
+冲突域是连接在同一个共享介质上的所有节点的集合。
+
+<img src="https://gitee.com/lynbz1018/image/raw/master/img/20220920225356.png" alt="image-20220920225355017" style="zoom: 50%;" />
+
+* 广播域：广播报文所能到达的整个访问范围称为二层广播域
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220920225725160.png" alt="image-20220920225725160" style="zoom:50%;" />
+
+* 以太网卡
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220920225909967.png" alt="image-20220920225909967" style="zoom:50%;" />
+
+
+
+### 5.2以太网帧
+
+* 以太网技术所使用的帧
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220920230359800.png" alt="image-20220920230359800" style="zoom:50%;" />
+
+* 每一个网卡都有一个全球唯一的MAC地址来标识
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220920230728504.png" alt="image-20220920230728504" style="zoom:50%;" />
+
+* MAC地址48bit，用12个十六进制数标识
+
+* 前24位是IEEE分配的厂商代码 后24位是厂商自己分配的代码
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220920231314124.png" alt="image-20220920231314124" style="zoom:50%;" />
+
+* 组播帧的从前开始数第八个是 1
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220920231806036.png" alt="image-20220920231806036" style="zoom:50%;" />
+
+### 5.3以太网交换机介绍
+
+* 二层交换机 工作在TCP/IP对等模型的第二层即数据链路层的交换机
+
+<img src="https://gitee.com/lynbz1018/image/raw/master/img/20220920233801.png" alt="image-20220920233800173" style="zoom:67%;" />
+
+* 交换机接收到数据帧后，会对比该帧的目的地址和mac地址表上的mac地址
+* 如果有对应的就从那个接口发送出去；
+* 如果没有找到就会采用泛洪方式向除接受口的所有接口发送该报文；
+* 目的主机接收到后会发送一个回复报文 交换机接收到后 继续匹配 且会记录这个源mac和端口号到mac地址表
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220921000557023.png" alt="image-20220921000557023" style="zoom:67%;" />
+
+* 单播帧没有匹配到就泛洪发送（出了接收口）
+* 广播帧直接泛洪发送
+
+* 如果目的**mac对应的接口和接受的端口一样就丢弃**
+
+
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220921001124041.png" alt="image-20220921001124041" style="zoom:50%;" />
+
+### 5.4同网段数据通信过程
+
+<img src="https://gitee.com/lynbz1018/image/raw/master/img/20220921001715.png" alt="image-20220921001713870" style="zoom:80%;" />
