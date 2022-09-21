@@ -504,41 +504,73 @@ Tracert通过每次更改TTL来获取每一条的超时报告报文，来追踪�
 
 ## 7.生成树
 
-
+### 7.1生成树基础
 
 以太网交换网络中为了进行链路备份，通常会使用冗余链路，这会再交换网络中产生环路。
 
 Spanning Tree Protocol就是用于解决交换网络中二层环路问题。
 
-运行STP协议的设备通过彼此交互信息发现网络中的环路，并且有选择的对某个接口进行阻塞，最终使环形网络变成树形网络。
+`运行STP协议的设备通过彼此交互信息发现网络中的环路，并且有选择的对某个接口进行阻塞，最终使环形网络变成树形网络。`
+
+**STP**是一个用于局域网中消除环路的协议。
+
+`1.防止环路 2.提供冗余备份链路`
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220921220646363.png" alt="image-20220921220646363" style="zoom:67%;" />
+
+* 二层交换机网络通过冗余线路来增强网络的可靠性
+
+* 引入冗余性同时也引入了二层环路问题，可能会到时数据帧在环路中不断循环
+
+<img src="https://gitee.com/lynbz1018/image/raw/master/img/20220921230745.png" alt="image-20220921230744047" style="zoom:33%;" />
+
+#### 二层环路问题
+
+广播风暴 mac地址漂移
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220921231620188.png" alt="image-20220921231620188" style="zoom:50%;" />
+
+#### 生成树的解决方案
+
+* 交换机之间进行STP报文交互并进行无环拓扑计算，将某个接口阻塞，打破环路
+* 生成树能**动态响应网络拓扑变化**调整阻塞接口
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220921232310844.png" alt="image-20220921232310844" style="zoom:50%;" />
+
+#### 三层环路
+
+* 三层环路 有ip头部的TTL可以防止无尽转发
+* 二层环路就是指tcp/ip的第二层数据连路层的环路
+
+![image-20220921233008223](https://gitee.com/lynbz1018/image/raw/master/img/20220921233009.png)
+
+### 7.2基本概念和工作原理	
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## 7.3RSTP对STP的改进
 
 
 
 ## 8.以太网链路聚合与交换机堆叠、集群
 
+### 8.1网络可靠性需求
 
+
+
+
+
+
+
+### 8.2链路聚合技术原理与配置
+
+
+
+
+
+
+
+### 8.3交换机堆叠、集群概述
 
 
 
