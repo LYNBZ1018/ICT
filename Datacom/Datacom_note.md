@@ -444,3 +444,198 @@ Tracert通过每次更改TTL来获取每一条的超时报告报文，来追踪�
 ### 5.4同网段数据通信过程
 
 <img src="https://gitee.com/lynbz1018/image/raw/master/img/20220921001715.png" alt="image-20220921001713870" style="zoom:80%;" />
+
+## 6.VLAN原理与配置
+
+### 6.1VLAN基本概念
+
+* 当交换机的mac地址表为空的时候，就会进行泛洪式转发，如果网络过大主机很多就会有很多垃圾流量
+* 可以利用VLAN划分多个广播域
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220921172913594.png" alt="image-20220921172913594" style="zoom:67%;" />
+
+* 通过VLAN 标签区分VLAN
+
+![image-20220921191952966](https://gitee.com/lynbz1018/image/raw/master/img/20220921191954.png)
+
+* VLAN数据帧 由交换机打上
+* PC处理的数据都是没有标签的
+* 交换机将数据帧发送给主机时，会把VLAN标签去掉
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220921192515143.png" alt="image-20220921192515143" style="zoom:67%;" />
+
+
+
+#### VLAN 划分方式
+
+* 基于**接口**的划分
+* 主机移动了需要重新划分VLAN
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220921193046649.png" alt="image-20220921193046649" style="zoom: 33%;" />
+
+* 基于**MAC地址**划分
+* 主机移动了不需要重新配置VLAN
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220921193306072.png" alt="image-20220921193306072" style="zoom: 33%;" />
+
+#### 交换机端口
+
+在交换机处理的帧都必须有vlan标签1
+
+交换机的三种接口 Access Trunk Hybrid
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220921194058113.png" alt="image-20220921194058113" style="zoom: 33%;" />
+
+* 在发送帧时，**只有vlan和pvid相同时才可以脱掉标签**
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220921194431390.png" alt="image-20220921194431390" style="zoom:33%;" />
+
+* 即使主机1发送的是广播，也是只有主机3能发送
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220921195053179.png" alt="image-20220921195053179" style="zoom:33%;" />
+
+* Hybrid相当于是Access和Trunk的杂交
+
+* Hybrid中，在发送时，vid在untagged中就脱掉标签，在tagged中就不能脱掉
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220921195850522.png" alt="image-20220921195850522" style="zoom:33%;" />
+
+
+
+## 7.生成树
+
+
+
+以太网交换网络中为了进行链路备份，通常会使用冗余链路，这会再交换网络中产生环路。
+
+Spanning Tree Protocol就是用于解决交换网络中二层环路问题。
+
+运行STP协议的设备通过彼此交互信息发现网络中的环路，并且有选择的对某个接口进行阻塞，最终使环形网络变成树形网络。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 8.以太网链路聚合与交换机堆叠、集群
+
+
+
+
+
+
+
+
+
+## 9.IP路由基础
+
+
+
+
+
+
+
+## 10.OSPF基础
+
+
+
+
+
+## 12.ACL原理与配置
+
+
+
+
+
+
+
+## 13.AAA原理与配置
+
+
+
+
+
+
+
+
+
+## 14.网络地址转换
+
+
+
+
+
+## 15.网络服务与应用
+
+
+
+
+
+
+
+
+
+## 16.WLAN概念
+
+
+
+
+
+
+
+
+
+## 17.广域网技术
+
+
+
+
+
+
+
+## 18.网络管理与运维
+
+
+
+
+
+
+
+## 19.IPv6技术
+
+
+
+
+
+
+
+
+
+## 20.SDN与NFV概念
+
+
+
+
+
+
+
+## 21.网络编程与自动化
