@@ -548,7 +548,7 @@ Spanning Tree Protocol就是用于解决交换网络中二层环路问题。
 
 
 
-## 7.3RSTP对STP的改进
+### 7.3RSTP对STP的改进
 
 
 
@@ -556,21 +556,99 @@ Spanning Tree Protocol就是用于解决交换网络中二层环路问题。
 
 ### 8.1网络可靠性需求
 
+**网络可靠性**：当设备或链路上出现一个或过个故障时仍能保障网络不间断的服务的能力
 
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220922122040166.png" alt="image-20220922122040166" style="zoom:50%;" />
 
-
+* 单板可以增加备份主板、线路
+* 设备可以增加冗余设备备份，用STP辅以解决环路问题
+* 生成树可以实现没有环路；有冗余备份；但是会造成带宽浪费。
 
 
 
 ### 8.2链路聚合技术原理与配置
 
+* 通过将多个物理接口捆绑成一个逻辑接口，可以在不升级硬件的情况下，达到升级链路带宽的目的。
+* 聚合模式有 手工模式 和 LACP模式
+
+![image-20220922124005612](https://gitee.com/lynbz1018/image/raw/master/img/20220922124006.png)
+
+#### 手工模式
+
+`老旧设备、低端，不支持LACP模式`
+
+`Eth-Trunk的建立、成员接口的加入都是由手动配置的`
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220922172656471.png" alt="image-20220922172656471" style="zoom:67%;" />
+
+##### 缺陷
+
+`为了使链路聚合接口正常工作，必须保证本端成员接口的对端接口：1.属于同一设备;2.加入同一链路聚合接口`
+
+`设备间没有报文交互，只能通过管理员人工确认`
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220922172856949.png" alt="image-20220922172856949" style="zoom:67%;" />
 
 
 
+#### LACP模式
 
+* 链路聚合控制协议数据单元
 
+`通过协议协商保证对端是同一设备、同一聚合接口的成员接口`
+
+`LACPDU包括 设备优先级 MAC地址 接口优先级 接口号`
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220922175250475.png" alt="image-20220922175250475" style="zoom:67%;" />
+
+##### 系统优先级
+
+系统两端的活动接口数必须一样，否则无法建立聚合链路。这是可以**使一端成为主动端**，另一端根据主动端选择活动接口。
+
+`1.系统优先级默认为32768，越小优先级越高；2.系统优先级相同时比较MAC地址，值越小优先级越高`
+
+##### 接口优先级
+
+选出主动端后，会根据主动端的接口优先级选择活动接口。
+
+`1.接口优先级默认为32768，越小越优；2.接口优先级相同时，根据接口编号选择，越小越优`
+
+##### 最大活动接口数
+
+LACP模式下支持配置最大活动接口数，当接口数超过限制后，会比较主动端的接口优先级、接口号选出最优的使用，其余的作为备份链路。
+
+如果有链路发生故障,在非活动链路中选择出一条优先级最高的替换掉，**实现总体带宽不变化、业务的不间断转发。**
+
+##### 负载分担
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220922210708295.png" alt="image-20220922210708295" style="zoom:80%;" />
+
+* 采用源目IP模式较好，可以使数据流较均衡的分担到各个活动链路上
+
+![image-20220922210933647](https://gitee.com/lynbz1018/image/raw/master/img/20220922210934.png)
+
+##### 链路聚合使用的典型场景
+
+![image-20220922211555592](https://gitee.com/lynbz1018/image/raw/master/img/20220922211556.png)
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220922211721041.png" alt="image-20220922211721041" style="zoom: 67%;" />
 
 ### 8.3交换机堆叠、集群概述
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220922212449676.png" alt="image-20220922212449676" style="zoom:67%;" />
+
+`1.逻辑上一台设备，简化运维方便管理；2.可以避免单点故障；3.物理上五环网络；4.链路聚合中链路全部有效使用`
+
+![image-20220922212547743](https://gitee.com/lynbz1018/image/raw/master/img/20220922212549.png)
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220922212905030.png" alt="image-20220922212905030" style="zoom:50%;" />
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220922212921097.png" alt="image-20220922212921097" style="zoom:50%;" />
+
+* 两个设备之间采用链路聚合
+* 上下层之间使用集群或堆叠实现备份路线 增加带宽 提高网络可靠性
+
+![image-20220922213103846](https://gitee.com/lynbz1018/image/raw/master/img/20220922213105.png)
 
 
 
@@ -580,7 +658,109 @@ Spanning Tree Protocol就是用于解决交换网络中二层环路问题。
 
 ## 9.IP路由基础
 
+### 9.1路由基本概念
 
+IP地址**唯一**标识了网络中的一个节点，每个IP地址都有自己的一个网段，要实现IP寻址，分布在不同区域的网段要能够相互通信
+
+* 三层网络设备**路由器**，指导报文转发路径，要维护一个路由表
+
+   
+
+路由信息： 目的IP/网络掩码、出口、下一条地址
+
+<img src="https://gitee.com/lynbz1018/image/raw/master/img/20220922235504.png" alt="image-20220922235503534" style="zoom:50%;" />
+
+   
+
+**路由条目的生成**
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220923000430118.png" alt="image-20220923000430118" style="zoom: 50%;" />
+
+   
+
+**直连路由**
+
+直连路由的目的IP和接口IP是同一网段
+
+直连路由出现在路由表中的前提是：该接口的物理转态和协议状态都是UP
+
+![image-20220923000852281](https://gitee.com/lynbz1018/image/raw/master/img/20220923000853.png)
+
+​         
+
+**最优路由条目优选**
+
+<img src="https://gitee.com/lynbz1018/image/raw/master/img/20220923001747.png" alt="image-20220923001746532" style="zoom:50%;" />
+
+目的网络不同 - 都加入路由表
+
+目的网络相同 - 将优先级低的加入路由表
+
+
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220923002406465.png" alt="image-20220923002406465" style="zoom:50%;" />
+
+
+
+优先级相同时 - COST度量小的加入路由表
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220923002500536.png" alt="image-20220923002500536" style="zoom:50%;" />
+
+​    
+
+**路由转发**
+
+* 最长匹配原则
+
+`当有多个路由条目匹配时，选择匹配长度最长的那个路由条目进行转发`
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220923003442193.png" alt="image-20220923003442193" style="zoom:50%;" />
+
+
+
+### 9.2静态路由
+
+静态路由需要网络管理员手动配置，不能动态适应网络拓扑变化
+
+<img src="https://gitee.com/lynbz1018/image/raw/master/img/20220923004109.png" alt="image-20220923004108783" style="zoom: 50%;" />
+
+* 默认路由，
+
+`ip route-static 0.0.0.0 10.0.0.2  // 将默认路由设置为10.0.0.2`
+
+![image-20220923004252336](https://gitee.com/lynbz1018/image/raw/master/img/20220923004253.png)
+
+### 9.3动态路由
+
+动态路由可以自主发现和生成路由，在拓扑变化时能及时更新路由，适合大规模的三层设备给网络
+
+![image-20220923004626173](https://gitee.com/lynbz1018/image/raw/master/img/20220923004627.png)
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220923004832350.png" alt="image-20220923004832350" style="zoom:67%;" />
+
+
+
+### 9.4路由高级特性
+
+* 递归路由
+
+![image-20220923005141899](https://gitee.com/lynbz1018/image/raw/master/img/20220923005143.png)
+
+* 等价路由
+
+来源相同、开销相同的路由都会加入路由表，两条路由指向相同的目的网段，但是有不同的下一条，会进行流量的分担
+
+<img src="https://gitee.com/lynbz1018/image/raw/master/img/20220923005328.png" alt="image-20220923005327412" style="zoom:50%;" />
+
+
+
+* 浮动路由
+
+主路由的备份，保障路由链路稳定
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220923005557099.png" alt="image-20220923005557099" style="zoom:67%;" />
+
+##### 路由汇总
 
 
 
