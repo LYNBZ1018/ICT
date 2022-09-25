@@ -802,9 +802,19 @@ CIDR无类别域间路由：允许任意长度的掩码长度，由IP地址/掩�
 
 ### 10.2使用路由器实现VLAN间通信
 
-通过物理接口实现，每一个VLAN间都要在路由器和二层交换机之间有一条链路，如果VLAN过多就会使路由器的接口占用过于庞大
+**通过物理接口实现**
+
+每一个VLAN间都要在路由器和二层交换机之间有一条链路，如果VLAN过多就会使路由器的接口占用过于庞大
 
 <img src="https://gitee.com/lynbz1018/image/raw/master/img/20220925232850.png" alt="image-20220925232848947" style="zoom:67%;" />
+
+**通过子接口实现**
+
+优点：减少了物理接口的使用，降低了成本
+
+缺点：只使用了一个物理接口，坏掉后所有的VLAN间通信都会中断，所有VLAN通信都占用同一个物理接口会造成平均带宽很低
+
+![image-20220925234125327](https://gitee.com/lynbz1018/image/raw/master/img/20220925234126.png)
 
 
 
@@ -812,19 +822,17 @@ CIDR无类别域间路由：允许任意长度的掩码长度，由IP地址/掩�
 
 
 
+![image-20220925235834424](https://gitee.com/lynbz1018/image/raw/master/img/20220925235835.png)
 
-
-
+<img src="https://gitee.com/lynbz1018/image/raw/master/img/20220926000612.png" alt="image-20220926000611770" style="zoom:80%;" />
 
 ### 10.4三层通信过程解析
 
+![image-20220926001626191](https://gitee.com/lynbz1018/image/raw/master/img/20220926001627.png)
 
 
 
-
-
-
-
+![image-20220926000841244](https://gitee.com/lynbz1018/image/raw/master/img/20220926000842.png)
 
 
 
