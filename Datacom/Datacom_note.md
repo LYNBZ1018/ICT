@@ -762,11 +762,73 @@ IP地址**唯一**标识了网络中的一个节点，每个IP地址都有自己
 
 ##### 路由汇总
 
+CIDR无类别域间路由：允许任意长度的掩码长度，由IP地址/掩码长度组成。
+
+路由汇总：将一组有规律的路由汇聚成一条路由，从而达到减小路由表规模以及优化设备资源利用率的目的。
+
+将一组路由的二进制表示形式放到一起，找到所有目的网络地址中”相同的比特位“
+
+**汇总引发的问题**
+
+带来环路问题
+
+因为进行了路由汇总，RTA的汇总后的目的网络更加宽泛
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220925222641454.png" alt="image-20220925222641454" style="zoom: 67%;" />
+
+增加一条指向Null0的路由即可解决环路问题
+
+![image-20220925223026337](https://gitee.com/lynbz1018/image/raw/master/img/20220925223027.png)
+
+**精确汇总**
+
+![image-20220925223938522](https://gitee.com/lynbz1018/image/raw/master/img/20220925223939.png)
 
 
 
 
-## 10.OSPF基础
+
+## 10.实现VLAN间通信
+
+### 10.1VLAN通信技术背景
+
+同网段、同VLAN的主机进行通信可以通过二层交换机进行转发，不需要三层网络设备。
+
+不同VLAN进行通信，需要三层设备。
+
+![image-20220925231542632](https://gitee.com/lynbz1018/image/raw/master/img/20220925231543.png)
+
+
+
+### 10.2使用路由器实现VLAN间通信
+
+通过物理接口实现，每一个VLAN间都要在路由器和二层交换机之间有一条链路，如果VLAN过多就会使路由器的接口占用过于庞大
+
+<img src="https://gitee.com/lynbz1018/image/raw/master/img/20220925232850.png" alt="image-20220925232848947" style="zoom:67%;" />
+
+
+
+### 10.3使用VLANIF技术实现VLAN间通信
+
+
+
+
+
+
+
+### 10.4三层通信过程解析
+
+
+
+
+
+
+
+
+
+
+
+## 11.OSPF基础
 
 
 
