@@ -838,6 +838,114 @@ CIDR无类别域间路由：允许任意长度的掩码长度，由IP地址/掩�
 
 ## 11.OSPF基础
 
+### 11.1OSPF协议概述
+
+#### 动态路由协议分类
+
+* 静态路由的缺点
+  * 无法适应规模较大的网络
+  * 无法动态响应网络变化
+
+
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220926113456083.png" alt="image-20220926113456083" style="zoom:80%;" />
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220926113828722.png" alt="image-20220926113828722" style="zoom:67%;" />
+
+建立邻居关系 - 传递LSDB，分享自己的接口信息 - 根据数据库建立最短路径树 - 生成路由表
+
+![image-20220926114147993](https://gitee.com/lynbz1018/image/raw/master/img/20220926114149.png)
+
+#### OSPF简介
+
+![image-20220926222630831](https://gitee.com/lynbz1018/image/raw/master/img/20220926222632.png)
+
+
+
+* 在核心交换机和汇聚交换机上运行OSPF，实现园区网络内的路由可达。
+
+
+
+**区域**
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220926223448609.png" alt="image-20220926223448609" style="zoom:50%;" />
+
+**Router-id**
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220926223528824.png" alt="image-20220926223528824" style="zoom: 33%;" />
+
+**度量值**
+
+Cost是没有小数的，如果值为0.1则会显示1；`100/100 = 1; 100/1000 = 0.1 = 1;两个Cost值相同`
+
+可以手动修改Cost值，也可通过修改100Mbit/s来修改最大值 `1000/100 = 10;1000/1000 = 1;`
+
+![image-20220926223613702](https://gitee.com/lynbz1018/image/raw/master/img/20220926223614.png)
+
+
+
+**OSPF五种报文**
+
+<img src="https://gitee.com/lynbz1018/image/raw/master/img/20220926224630.png" alt="image-20220926224246791" style="zoom:67%;" />
+
+
+
+**邻居表**
+
+**<img src="https://gitee.com/lynbz1018/image/raw/master/img/20220926224627.png" alt="image-20220926224503858" style="zoom:67%;" />**
+
+**LSDB表**
+
+![image-20220926224616909](https://gitee.com/lynbz1018/image/raw/master/img/20220926224618.png)
+
+**OSPF表**
+
+OSPF表由的IP表不一定有
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220926224750588.png" alt="image-20220926224750588" style="zoom:67%;" />
+
+### 11.2OSPF协议工作原理
+
+#### OSPF邻居建立
+
+<img src="https://gitee.com/lynbz1018/image/raw/master/img/20220926225348.png" alt="image-20220926225347468" style="zoom:67%;" />
+
+![image-20220926225451745](https://gitee.com/lynbz1018/image/raw/master/img/20220926225452.png)
+
+1. 发现了自己的邻居在邻居表中状态为 **2-Way**
+
+![image-20220926225639634](https://gitee.com/lynbz1018/image/raw/master/img/20220926225652.png)
+
+<img src="https://gitee.com/lynbz1018/image/raw/master/img/20220926230218.png" alt="image-20220926230217130" style="zoom:80%;" />
+
+<img src="https://gitee.com/lynbz1018/image/raw/master/img/20220926230325.png" alt="image-20220926230323950" style="zoom:80%;" />
+
+
+
+#### OSPF路由表建立
+
+OSPF有四种网络类型：Broadcast、NBMA、P2MP、P2P
+
+![image-20220926231033672](https://gitee.com/lynbz1018/image/raw/master/img/20220926231034.png)
+
+![image-20220926231243678](https://gitee.com/lynbz1018/image/raw/master/img/20220926231244.png)
+
+![image-20220926231329936](https://gitee.com/lynbz1018/image/raw/master/img/20220926231331.png)
+
+##### DR与BDR制定路由器与备份制定路由器
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220926231626910.png" alt="image-20220926231626910" style="zoom:67%;" />
+
+<img src="C:%5CUsers%5Clyn95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220926231805802.png" alt="image-20220926231805802" style="zoom:67%;" />
+
+##### 多区域
+
+![image-20220926232100069](https://gitee.com/lynbz1018/image/raw/master/img/20220926232101.png)
+
+##### OSPF路由器类型
+
+![image-20220926232307473](https://gitee.com/lynbz1018/image/raw/master/img/20220926232308.png)
+
 
 
 
